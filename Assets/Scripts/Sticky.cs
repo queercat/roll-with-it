@@ -8,12 +8,18 @@ public class Sticky : MonoBehaviour
 
     }
 
+    void Glorp(GameObject glorpable)
+    {
+        glorpable.transform.parent = transform;
+        Destroy(glorpable.GetComponent<Rigidbody>());
+        EventManager.Instance.OnGlorp();
+    }
+
     void OnCollisionEnter(Collision c)
     {
         if (c.gameObject.tag == "Glorpable")
         {
-            c.gameObject.transform.parent = transform;
-            Destroy(c.gameObject.GetComponent<Rigidbody>());
+            Glorp(c.gameObject);
         }
     }
 
